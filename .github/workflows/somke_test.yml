@@ -1,7 +1,7 @@
 name : Smoke Testing for infra and Networking
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   working-job:
