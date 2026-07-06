@@ -41,6 +41,11 @@ def generate_account_number():
 
 
 # ─── Home ───────────────────────────────────────────────
+@app.route('/health')
+def health():
+    return True
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
