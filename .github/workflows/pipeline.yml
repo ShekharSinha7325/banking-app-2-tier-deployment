@@ -10,7 +10,7 @@ on:
 
 jobs:
   verify:
-    uses: ./.github/workflows/test-connection.yml
+    uses: ./.github/workflows/test_connection.yml
     permissions:
       id-token: write
       contents: read
