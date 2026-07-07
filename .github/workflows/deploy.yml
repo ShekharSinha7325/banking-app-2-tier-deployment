@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 env:
-  VERSION: v1
+  VERSION: v2
   REGION: us-east-1
   ECR: 910781031695.dkr.ecr.us-east-1.amazonaws.com
   IMAGE: 910781031695.dkr.ecr.us-east-1.amazonaws.com/flaskapp-simple-bank
@@ -56,10 +56,10 @@ jobs:
               "mkdir -p /home/ubuntu/app",
               "aws s3 cp ${{ env.S3_BUCKET }}/docker-compose.yml /home/ubuntu/app/docker-compose.yml",
               "docker pull ${{ env.IMAGE }}:${{ env.VERSION }}",
-              "docker stop simplebank_app 2>/dev/null || true",
-              "docker rm simplebank_app 2>/dev/null || true",
+              "docker stop simplebank 2>/dev/null || true",
+              "docker rm simplebank 2>/dev/null || true",
               "cd /home/ubuntu/app && IMAGE_TAG=${{ env.VERSION }} docker compose up -d",
-              "docker ps --filter name=simplebank_app --format {{.Status}} | grep -q Up && echo CONTAINER_RUNNING || (echo CONTAINER_FAILED && exit 1)"
+              "docker ps --filter name=simplebank --format {{.Status}} | grep -q Up && echo CONTAINER_RUNNING || (echo CONTAINER_FAILED && exit 1)"
             ]}' \
             --query 'Command.CommandId' \
             --output text \
