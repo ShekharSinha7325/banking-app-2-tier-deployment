@@ -34,7 +34,7 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters '{"commands":[
               "aws s3 cp s3://910781031695-devops-scripts/smoke_test.py /tmp/smoke_test.py",
-              "python3 -m pip install PyMySQL --break-system-packages",,
+              "python3 -m pip install PyMySQL --break-system-packages",
               "python3 /tmp/smoke_test.py || exit 1",
               "rm /tmp/smoke_test.py"
             ]}' \
