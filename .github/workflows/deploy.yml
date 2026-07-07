@@ -1,10 +1,10 @@
-name: Deploy SimpleBank 
+name: Deploy SimpleBank
 
-on: 
- workflow_call: 
+on:
+  workflow_call:
 
-permissions: 
-  id-token: write 
+permissions:
+  id-token: write
   contents: read
 
 env:
@@ -17,6 +17,7 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,10 +56,10 @@ jobs:
               "mkdir -p /home/ubuntu/app",
               "aws s3 cp ${{ env.S3_BUCKET }}/docker-compose.yml /home/ubuntu/app/docker-compose.yml",
               "docker pull ${{ env.IMAGE }}:${{ env.VERSION }}",
-              "docker stop simplebank 2>/dev/null  true",
-              "docker rm simplebank 2>/dev/null  true",
+              "docker stop simplebank 2>/dev/null || true",
+              "docker rm simplebank 2>/dev/null || true",
               "cd /home/ubuntu/app && IMAGE_TAG=${{ env.VERSION }} docker compose up -d",
-              "docker ps --filter name=simplebank --format {{.Status}} | grep -q Up && echo CONTAINER_RUNNING  (echo CONTAINER_FAILED && exit 1)"
+              "docker ps --filter name=simplebank --format {{.Status}} | grep -q Up && echo CONTAINER_RUNNING || (echo CONTAINER_FAILED && exit 1)"
             ]}' \
             --query 'Command.CommandId' \
             --output text \
@@ -76,7 +77,13 @@ jobs:
               --region ${{ env.REGION }})
 
             echo "[$i] Status: $STATUS"
-            echo "$STATUS" | grep -q "InProgress\|Pending" && sleep 10  break
+
+            echo "$STATUS" | grep -q "InProgress\|Pending" && {
+              sleep 10
+              continue
+            }
+
+            break
           done
 
           echo "============ DEPLOY RESULTS ============"
