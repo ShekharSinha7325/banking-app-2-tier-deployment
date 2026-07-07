@@ -3,7 +3,7 @@ services:
     image: 910781031695.dkr.ecr.us-east-1.amazonaws.com/flaskapp-simple-bank:${IMAGE_TAG:latest}
     container_name: simplebank
     ports:
-      -"5000:5000"
+      - "5000:5000"
     environment:
       - "FLASK_ENV=production"
     restart: unless-stopped
