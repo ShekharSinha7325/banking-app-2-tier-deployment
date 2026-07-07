@@ -66,4 +66,4 @@ jobs:
             echo "::error::Database Creation Failed $FAILED instance(s)!" && \
             exit 1
 
-          echo "✅ Database Created Successfully"
+          echo "✅ Database Created  Successfully"
