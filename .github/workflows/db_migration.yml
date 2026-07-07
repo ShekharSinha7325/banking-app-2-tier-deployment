@@ -35,7 +35,7 @@ jobs:
             --targets "Key=tag:App,Values=flask" \
             --document-name "AWS-RunShellScript" \
             --parameters '{"commands":[
-              "aws s3 cp s3://910781031695-devops-scripts/smoke_test.py /tmp/init.py --region us-east-1",
+              "aws s3 cp s3://910781031695-devops-scripts/init.py /tmp/init.py --region us-east-1",
               "python3 -m pip install PyMySQL --break-system-packages",
               "python3 /tmp/init.py",
               "rm -f /tmp/init.py"
