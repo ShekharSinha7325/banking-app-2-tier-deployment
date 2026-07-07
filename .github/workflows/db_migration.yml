@@ -36,7 +36,7 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters '{"commands":[
               "aws s3 cp s3://910781031695-devops-scripts/init.py /tmp/init.py --region us-east-1",
-              "python3 -m pip install PyMySQL --break-system-packages",
+              "aws s3 cp s3://910781031695-devops-scripts/init.sql /tmp/init.sql --region us-east-1",
               "python3 /tmp/init.py",
               "rm -f /tmp/init.py"
             ]}' \
