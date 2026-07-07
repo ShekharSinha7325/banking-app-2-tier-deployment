@@ -78,12 +78,7 @@ jobs:
 
             echo "[$i] Status: $STATUS"
 
-            echo "$STATUS" | grep -q "InProgress\|Pending" && {
-              sleep 10
-              continue
-            }
-
-            break
+            echo "$STATUS" | grep -q "InProgress\|Pending" && sleep 10 break
           done
 
           echo "============ DEPLOY RESULTS ============"
